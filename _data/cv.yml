@@ -175,27 +175,27 @@ cv:
 
     Skills:
       - name: AI
-        level: Expert
+        level: 
         icon: fa-solid fa-brain
         keywords: "Graph Neural Networks, Generative AI, Agentic AI, Large Language Models, Prompt Engineering, RAG, Statistical Relational Learning, Preference Learning"
 
       - name: Programming Languages
-        level: Advanced
+        level: 
         icon: fa-solid fa-code
         keywords: "Python, Java, SQL"
 
       - name: Tools & Frameworks
-        level: Advanced
+        level: 
         icon: fa-solid fa-toolbox
         keywords: "PyTorch, PyTorch Geometric, NumPy, Git, LangGraph, Autogen, Jira, AWS, Microsoft Office Suite, Scikit-learn, Pandas, Polars, Matplotlib, TensorFlow"
 
       - name: Operating Systems
-        level: Advanced
+        level: 
         icon: fa-solid fa-desktop
         keywords: "Linux, macOS, Windows"
 
       - name: Soft Skills
-        level: Advanced
+        level: 
         icon: fa-solid fa-people-group
         keywords: "Teamwork, Problem Solving, Analytical Thinking, Teaching and Presentation, Interaction with Clients, Adaptability, Creativity"
 
