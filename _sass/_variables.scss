@@ -32,6 +32,15 @@ $grey-900: #212529;
 $white-color: #ffffff !default;
 $black-color: #000000 !default;
 
+// Synthwave palette (used by dark mode + vaporwave easter egg)
+$synthwave-bg: #0d0a1f !default;
+$synthwave-bg-deep: #06031a !default;
+$synthwave-magenta: #ff2a92 !default;
+$synthwave-cyan: #00e5ff !default;
+$synthwave-purple: #a855f7 !default;
+$synthwave-text: #e6e1ff !default;
+$synthwave-text-dim: #9b8fc7 !default;
+
 // Theme colors
 
 $code-bg-color-light: rgba($purple-color, 0.05);

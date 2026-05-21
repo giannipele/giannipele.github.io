@@ -1,0 +1,285 @@
+/*******************************************************************************
+ * Synthwave / programmer aesthetic overlay.
+ *
+ * Tier-1 polish (monospace title, terminal prompt, blinking caret, custom
+ * text selection, animated gradient ring on the avatar) applies in both
+ * light and dark mode. The full synthwave palette + glow effects only kick
+ * in for dark mode. A vaporwave easter egg is toggled via the Konami code
+ * in `assets/js/synthwave.js`.
+ ******************************************************************************/
+
+@use "variables" as v;
+
+/* ----------------------------------------------------------------
+ * Custom CSS property for the animated conic-gradient ring
+ * ---------------------------------------------------------------- */
+@property --synthwave-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* ----------------------------------------------------------------
+ * Text selection — magenta highlight everywhere
+ * ---------------------------------------------------------------- */
+::selection {
+  background: v.$synthwave-magenta;
+  color: v.$white-color;
+  text-shadow: none;
+}
+::-moz-selection {
+  background: v.$synthwave-magenta;
+  color: v.$white-color;
+}
+
+/* ----------------------------------------------------------------
+ * About-page H1: monospace + terminal prompt prefix
+ * Scoped to .about-title so blog post titles keep their original font.
+ * ---------------------------------------------------------------- */
+.post-title.about-title {
+  font-family: "JetBrains Mono", "Fira Code", "Source Code Pro", monospace;
+  letter-spacing: -0.02em;
+
+  .terminal-prompt {
+    color: var(--global-theme-color);
+    margin-right: 0.15em;
+    opacity: 0.85;
+    user-select: none;
+    font-weight: 500;
+  }
+}
+
+/* ----------------------------------------------------------------
+ * Subtitle: trailing blinking caret
+ * ---------------------------------------------------------------- */
+.post-header .desc.terminal-caret::after {
+  content: "_";
+  display: inline-block;
+  margin-left: 0.15em;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-weight: 700;
+  color: var(--global-theme-color);
+  animation: synthwaveCaretBlink 1.1s steps(2, start) infinite;
+}
+
+@keyframes synthwaveCaretBlink {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* ----------------------------------------------------------------
+ * Inline code gets a monospace synthwave look
+ * (dark-mode-only colors are below)
+ * ---------------------------------------------------------------- */
+code,
+p code,
+li code {
+  font-family: "JetBrains Mono", "Fira Code", "Source Code Pro", monospace;
+}
+
+/* ----------------------------------------------------------------
+ * Animated synthwave gradient ring around the profile picture.
+ * Works because @property + conic-gradient `from <angle>` are widely
+ * supported in modern browsers. Falls back to a static border otherwise.
+ * ---------------------------------------------------------------- */
+.profile img {
+  border: 3px solid transparent;
+  background:
+    linear-gradient(var(--global-card-bg-color), var(--global-card-bg-color)) padding-box,
+    conic-gradient(
+        from var(--synthwave-angle, 0deg),
+        #{v.$synthwave-magenta},
+        #{v.$synthwave-cyan},
+        #{v.$synthwave-purple},
+        #{v.$synthwave-magenta}
+      )
+      border-box;
+  animation: synthwaveRing 8s linear infinite;
+}
+
+@keyframes synthwaveRing {
+  to {
+    --synthwave-angle: 360deg;
+  }
+}
+
+/* ================================================================
+ * DARK-MODE-ONLY synthwave atmosphere
+ * ================================================================ */
+html[data-theme="dark"] {
+  background-color: v.$synthwave-bg;
+
+  body {
+    background-color: transparent;
+  }
+
+  /* Subtle Outrun-style horizon grid behind the page (lower-half only) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        180deg,
+        transparent 0%,
+        transparent 55%,
+        rgba(255, 42, 146, 0.1) 100%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 229, 255, 0.08) 0,
+        rgba(0, 229, 255, 0.08) 1px,
+        transparent 1px,
+        transparent 60px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(255, 42, 146, 0.08) 0,
+        rgba(255, 42, 146, 0.08) 1px,
+        transparent 1px,
+        transparent 60px
+      );
+    mask-image: linear-gradient(180deg, transparent 50%, black 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 50%, black 100%);
+  }
+
+  /* Glow on links */
+  a,
+  table.table a {
+    text-shadow:
+      0 0 4px rgba(255, 42, 146, 0.45),
+      0 0 12px rgba(255, 42, 146, 0.2);
+    transition:
+      text-shadow 0.2s ease,
+      color 0.2s ease;
+  }
+
+  a:hover,
+  table.table a:hover {
+    color: v.$synthwave-cyan;
+    text-shadow:
+      0 0 6px rgba(0, 229, 255, 0.7),
+      0 0 16px rgba(0, 229, 255, 0.35);
+  }
+
+  /* Glow on the about-page H1 */
+  .post-title.about-title {
+    text-shadow:
+      0 0 6px rgba(255, 42, 146, 0.55),
+      0 0 22px rgba(255, 42, 146, 0.25);
+  }
+
+  /* Subtitle in cyan */
+  .post-header .desc {
+    color: v.$synthwave-cyan;
+  }
+
+  /* Inline code: cyan-on-magenta-tint */
+  code {
+    color: v.$synthwave-cyan;
+    background: rgba(255, 42, 146, 0.08);
+    border: 1px solid rgba(255, 42, 146, 0.25);
+    border-radius: 4px;
+    padding: 0 0.35em;
+  }
+
+  /* Recolored scroll progress bar: magenta -> cyan gradient */
+  progress::-webkit-progress-value {
+    background: linear-gradient(90deg, v.$synthwave-magenta, v.$synthwave-cyan);
+  }
+  progress::-moz-progress-bar {
+    background: linear-gradient(90deg, v.$synthwave-magenta, v.$synthwave-cyan);
+  }
+  .progress-bar {
+    background: linear-gradient(90deg, v.$synthwave-magenta, v.$synthwave-cyan);
+  }
+
+  /* Brand / navbar links pick up the magenta glow */
+  .navbar-brand,
+  .navbar .nav-link {
+    transition: text-shadow 0.2s ease;
+    &:hover {
+      text-shadow:
+        0 0 6px rgba(0, 229, 255, 0.7),
+        0 0 14px rgba(0, 229, 255, 0.35);
+    }
+  }
+}
+
+/* ================================================================
+ * VAPORWAVE easter egg — toggled via the Konami code
+ * (see assets/js/synthwave.js). Adds `vaporwave` class to <html>.
+ * ================================================================ */
+html.vaporwave {
+  --global-bg-color: #1a0633;
+  --global-text-color: #fff1ff;
+  --global-text-color-light: #ffb6f0;
+  --global-theme-color: #ff77e9;
+  --global-hover-color: #00f0ff;
+  --global-card-bg-color: #2b0a4a;
+  --global-divider-color: rgba(255, 119, 233, 0.35);
+  color-scheme: dark;
+  background-color: #1a0633;
+
+  body {
+    background-color: transparent;
+    animation: vaporwaveHue 22s linear infinite;
+  }
+
+  /* Punchier horizon grid */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, transparent 0%, transparent 45%, rgba(255, 42, 146, 0.2) 100%),
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 229, 255, 0.16) 0,
+        rgba(0, 229, 255, 0.16) 1px,
+        transparent 1px,
+        transparent 40px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(255, 42, 146, 0.16) 0,
+        rgba(255, 42, 146, 0.16) 1px,
+        transparent 1px,
+        transparent 40px
+      );
+    mask-image: linear-gradient(180deg, transparent 40%, black 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 40%, black 100%);
+  }
+
+  .post-title.about-title {
+    text-shadow:
+      2px 0 0 v.$synthwave-magenta,
+      -2px 0 0 v.$synthwave-cyan,
+      0 0 14px rgba(255, 42, 146, 0.6);
+  }
+}
+
+@keyframes vaporwaveHue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* ----------------------------------------------------------------
+ * Respect users who prefer reduced motion
+ * ---------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .post-header .desc.terminal-caret::after,
+  .profile img,
+  html.vaporwave body {
+    animation: none !important;
+  }
+}

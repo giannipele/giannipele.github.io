@@ -266,11 +266,13 @@ let transTheme = () => {
 };
 
 // Determine the expected state of the theme toggle, which can be "dark", "light", or
-// "system". Default is "system".
+// "system". First-time visitors default to "dark" so the synthwave palette
+// is what they see. Visitors who toggle the theme have their choice persisted
+// in localStorage and the manual toggle still cycles dark/light/system.
 let determineThemeSetting = () => {
   let themeSetting = localStorage.getItem("theme");
   if (themeSetting != "dark" && themeSetting != "light" && themeSetting != "system") {
-    themeSetting = "system";
+    themeSetting = "dark";
   }
   return themeSetting;
 };

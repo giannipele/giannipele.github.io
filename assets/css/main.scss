@@ -37,3 +37,7 @@
 @use "font-awesome/brands";
 @use "font-awesome/solid";
 @use "font-awesome/regular";
+
+// Personal synthwave / programmer aesthetic overlay (must come last so it
+// can override defaults from the other partials).
+@use "synthwave";

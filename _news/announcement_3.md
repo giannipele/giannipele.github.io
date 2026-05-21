@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Co-launched the [PyTorch Geometric Tutorial](https://www.youtube.com/@pytorchgeometrictutorial) series — an online series on Graph Neural Networks available on YouTube.
+Co-launched the [PyTorch Geometric Tutorial](https://www.youtube.com/playlist?list=PLGMXrbDNfqTzqxB1IGgimuhtfAhGd8lHF) series — an online series on Graph Neural Networks available on YouTube.
