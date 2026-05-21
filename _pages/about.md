@@ -25,7 +25,7 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-I am an AI Scientist at [Ipazia S.p.A.](https://www.ipazia.com/), where I design and build cutting-edge artificial intelligence products for businesses, combining traditional machine learning with modern agentic AI systems.
+I work as AI Scientist at [Ipazia S.p.A.](https://www.ipazia.com/), where I design and build cutting-edge artificial intelligence products for businesses, combining traditional machine learning with modern agentic AI systems.
 
 My current work spans time-series analysis for behavioral profiling, recommendation systems, financial risk estimation, and the research and development of agentic AI solutions built on top of frameworks such as LangGraph and Autogen.
 
