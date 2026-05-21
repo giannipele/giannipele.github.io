@@ -40,6 +40,13 @@ body.sticky-bottom-footer {
   }
 }
 
+.profile img {
+  border-radius: 50%;
+  object-fit: cover;          // crops to square without distorting
+  aspect-ratio: 1 / 1;
+  border: 3px solid var(--global-theme-color);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
 // Content layout uses Bootstrap's grid system with responsive columns
 // Main content flows naturally through container-mt-5 and Bootstrap grid classes
 // See _layouts/default.liquid and _includes/projects.liquid for examples

@@ -6,8 +6,8 @@ subtitle: AI Scientist at <a href='https://www.ipazia.com/'>Ipazia S.p.A.</a>. M
 
 profile:
   align: right
-  image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
+  image: profile_picture.jpg
+  image_circular: true # crops the image to make it circular
   more_info: >
     <p>I live in Trento, in the middle of the Italian Alps</p>
 
